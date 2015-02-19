@@ -67,8 +67,11 @@ class Intercom(object):
             method, url, timeout=cls._config.timeout,
             auth=(Intercom.app_id, Intercom.app_api_key), **req_params)
 
-        if resp.content:
+        # the events api sends a "202 Accepted" without a body content
+        # well, actually they send back a whitespace, hence the .strip() here
+        if resp.content.strip():
             return json.loads(resp.content)
+        return dict()
 
     @classmethod
     def get(cls, path, **params):
