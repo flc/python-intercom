@@ -10,9 +10,10 @@ class FlatStore(dict):
         if not (
             isinstance(value, numbers.Real) or
             isinstance(value, basestring)
-        ):
+        ) and value is not None:
             raise ValueError(
-                "custom data only allows string and real number values")
+                "custom data only allows string, real number or None values"
+                )
         if not isinstance(key, basestring):
             raise ValueError("custom data only allows string keys")
         super(FlatStore, self).__setitem__(key, value)
