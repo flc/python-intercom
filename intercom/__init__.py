@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
-from json import JSONEncoder
-from .errors import ArgumentError
-from .lib.setter_property import SetterProperty
-
 import copy
 import json
+import logging
 import random
 import re
 import requests
 import time
+
+from datetime import datetime
+
+from json import JSONEncoder
+
+from .errors import ArgumentError
+from .lib.setter_property import SetterProperty
+
 
 __version__ = '2.0-alpha'
 
@@ -24,6 +28,9 @@ COMPATIBILITY_WORKAROUND_TEXT = "To get rid of this error please set \
 Intercom.app_api_key and don't set Intercom.api_key."
 CONFIGURATION_REQUIRED_TEXT = "You must set both Intercom.app_id and \
 Intercom.app_api_key to use this client."
+
+
+logger = logging.getLogger("intercom")
 
 
 class _Config(object):
@@ -63,6 +70,7 @@ class Intercom(object):
             req_params['params'] = params
         req_params['headers'] = headers
 
+        logger.debug("req params: %s", req_params)
         resp = requests.request(
             method, url, timeout=cls._config.timeout,
             auth=(Intercom.app_id, Intercom.app_api_key), **req_params)

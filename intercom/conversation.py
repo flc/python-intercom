@@ -8,3 +8,7 @@ from intercom.extended_api_operations.reply import Reply
 
 class Conversation(Resource, FindAll, Find, Load, Save, Reply):
     pass
+
+
+class Message(Resource, FindAll, Find, Load, Save, Reply):
+    pass
