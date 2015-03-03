@@ -271,7 +271,7 @@ Tag.count()
 
 ``` python
 # InApp message from admin to user
-Message.create({
+Message.create(**{
     "message_type": "inapp",
     "body": "What's up :)",
     "from": {
