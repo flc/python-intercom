@@ -10,5 +10,5 @@ class Conversation(Resource, FindAll, Find, Load, Save, Reply):
     pass
 
 
-class Message(Resource, FindAll, Find, Load, Save, Reply):
+class Message(Resource, Save):
     pass
